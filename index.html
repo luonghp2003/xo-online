@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#111827" />
+  <title>X-O Online - 2 người</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">XO ONLINE</p>
+        <h1>Cờ X-O trực tuyến 2 người</h1>
+        <p class="subtitle">Tạo phòng, gửi mã hoặc link cho bạn bè và chơi ngay trên trình duyệt.</p>
+      </div>
+      <div id="connectionBadge" class="badge offline">Đang kết nối...</div>
+    </section>
+
+    <section id="lobbyView" class="panel lobby-grid">
+      <div class="card">
+        <h2>Tạo phòng mới</h2>
+        <p>Bạn sẽ chơi quân <strong>X</strong>. Người thứ hai vào phòng sẽ là <strong>O</strong>.</p>
+        <button id="createRoomBtn" class="btn primary" type="button">Tạo phòng</button>
+      </div>
+
+      <div class="card">
+        <h2>Vào phòng</h2>
+        <form id="joinForm">
+          <label for="roomCodeInput">Mã phòng</label>
+          <div class="join-row">
+            <input id="roomCodeInput" name="roomCode" maxlength="6" autocomplete="off" placeholder="VD: AB12CD" required />
+            <button class="btn" type="submit">Tham gia</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section id="gameView" class="panel hidden" aria-live="polite">
+      <div class="game-topbar">
+        <div>
+          <p class="label">Mã phòng</p>
+          <div class="room-code-row">
+            <strong id="roomCodeText" class="room-code">------</strong>
+            <button id="copyLinkBtn" class="btn small" type="button">Sao chép link</button>
+          </div>
+        </div>
+        <button id="leaveBtn" class="btn ghost" type="button">Rời phòng</button>
+      </div>
+
+      <div class="status-grid">
+        <div class="player-box" id="playerXBox">
+          <span class="symbol x">X</span>
+          <div><strong>Người chơi X</strong><span id="xStatus">Chưa vào</span></div>
+        </div>
+        <div class="player-box" id="playerOBox">
+          <span class="symbol o">O</span>
+          <div><strong>Người chơi O</strong><span id="oStatus">Chưa vào</span></div>
+        </div>
+      </div>
+
+      <div class="you-line">Bạn đang chơi: <strong id="mySymbol">-</strong></div>
+      <p id="gameStatus" class="game-status">Đang chờ người chơi...</p>
+
+      <div id="board" class="board" role="grid" aria-label="Bàn cờ X-O">
+        <button class="cell" type="button" data-index="0" aria-label="Ô 1"></button>
+        <button class="cell" type="button" data-index="1" aria-label="Ô 2"></button>
+        <button class="cell" type="button" data-index="2" aria-label="Ô 3"></button>
+        <button class="cell" type="button" data-index="3" aria-label="Ô 4"></button>
+        <button class="cell" type="button" data-index="4" aria-label="Ô 5"></button>
+        <button class="cell" type="button" data-index="5" aria-label="Ô 6"></button>
+        <button class="cell" type="button" data-index="6" aria-label="Ô 7"></button>
+        <button class="cell" type="button" data-index="7" aria-label="Ô 8"></button>
+        <button class="cell" type="button" data-index="8" aria-label="Ô 9"></button>
+      </div>
+
+      <div class="game-actions">
+        <button id="rematchBtn" class="btn primary" type="button" disabled>Chơi lại</button>
+      </div>
+      <p id="toast" class="toast" role="status"></p>
+    </section>
+
+    <footer>Node.js + Socket.IO • Chơi realtime giữa 2 trình duyệt</footer>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
